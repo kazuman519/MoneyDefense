@@ -4,7 +4,8 @@ using System.Collections;
 public class MoneyFactory : MonoBehaviour {
 	public string prefabName = "Prefabs/Money1kObject";
 	public float generateTime = 2.0f;
-	public float positionOffset = 10;
+	public float positionOffset = 1;
+	public float destroyTime = 1.0f;
 	private float previousGeneratedTime;
 
 	// Use this for initialization
@@ -14,15 +15,16 @@ public class MoneyFactory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (shouldCreateNextEnemy()) {
+		if (shouldCreateNextObject()) {
 			Vector2 position = this.transform.position;
 			Object prefab = Resources.Load (prefabName);
 			position.x = position.x + positionOffset;
-			Instantiate (prefab, position, Quaternion.identity);
+			Object instance = Instantiate (prefab, position, Quaternion.identity);
+			Object.Destroy(instance, destroyTime);
 		}
 	}
 
-	bool shouldCreateNextEnemy () {
+	bool shouldCreateNextObject () {
 		float time = Time.realtimeSinceStartup;
 		if (time > previousGeneratedTime + generateTime) {
 			previousGeneratedTime = time;
