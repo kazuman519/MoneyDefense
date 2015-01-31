@@ -13,9 +13,19 @@ public class OyagiController: MonoBehaviour {
 		Vector3 position = this.gameObject.transform.position;
 
 		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			this.gameObject.rigidbody2D.velocity = new Vector2(-speed, 0);
+			move (-speed);
 		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			this.gameObject.rigidbody2D.velocity = new Vector3(speed, 0);
+			move (speed);
 		}
+
+		if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width / 2) {
+			move(speed);
+		} else {
+			move(-speed);
+		}
+	}
+
+	void move(float speed) {
+		this.gameObject.rigidbody2D.velocity = new Vector3(speed, 0);
 	}
 }
