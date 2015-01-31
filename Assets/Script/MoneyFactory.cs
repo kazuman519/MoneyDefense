@@ -2,10 +2,11 @@
 using System.Collections;
 
 public class MoneyFactory : MonoBehaviour {
-	public string prefabName = "Prefabs/Money1kObject";
-	public float generateTime = 2.0f;
+	public string prefabMoney1kObjectName = "Prefabs/Money1kObject";
+	public string prefabMoney5kObjectName = "Prefabs/Money5kObject";
+	public string prefabMoney10kObjectName = "Prefabs/Money10kObject";
+
 	public float positionOffset = 1;
-	public float destroyTime = 1.0f;
 	private float previousGeneratedTime;
 
 	// Use this for initialization
@@ -17,21 +18,11 @@ public class MoneyFactory : MonoBehaviour {
 	void Update () {
 	}
 
-	bool shouldCreateNextObject () {
-		float time = Time.realtimeSinceStartup;
-		if (time > previousGeneratedTime + generateTime) {
-			previousGeneratedTime = time;
-			return true;
-		}
-		return false;
-	}
-
-	void createMoney1kObject() {
+	void createMoneyObject(string prefabName) {
 		Vector2 position = this.transform.position;
 		Object prefab = Resources.Load (prefabName);
 		position.x = position.x + positionOffset;
 		Object instance = Instantiate (prefab, position, Quaternion.identity);
-		Object.Destroy(instance, destroyTime);
 	}
 
 	// ------------------------------------------------
@@ -40,14 +31,17 @@ public class MoneyFactory : MonoBehaviour {
 
 	public void onMoney1kButtonClicked(){
  		Debug.Log ("on money1kbutton clicked");
-		createMoney1kObject ();
+		createMoneyObject (prefabMoney1kObjectName);
 	}
 
 	public void onMoney5kButtonClicked(){
 		Debug.Log ("on money5kbutton clicked");
+		createMoneyObject (prefabMoney5kObjectName);
+
 	}
 
 	public void onMoney10kButtonClicked(){
 		Debug.Log ("on money10kbutton clicked");
+		createMoneyObject (prefabMoney10kObjectName);
 	}
 }
