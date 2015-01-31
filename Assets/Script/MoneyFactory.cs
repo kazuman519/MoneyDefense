@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MoneyFactory : MonoBehaviour {
-	public string prefabName = "Prefabs/MoneyObject";
+	public string prefabName = "Prefabs/Money1kObject";
 	public float generateTime = 2.0f;
 	public float positionOffset = 10;
 	private float previousGeneratedTime;
