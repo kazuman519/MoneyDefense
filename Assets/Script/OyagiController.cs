@@ -3,25 +3,34 @@ using System.Collections;
 
 public class OyagiController: MonoBehaviour {
 	public float speed = 1;
+	private bool isMoving;
+	private bool isMoveRight;
 
 	// Use this for initialization
 	void Start () {
+		isMoving = false;
+		isMoveRight = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 position = this.gameObject.transform.position;
-
-		if (Input.GetKeyDown (KeyCode.LeftArrow)) {
-			move (-speed);
-		} else if (Input.GetKeyDown (KeyCode.RightArrow)) {
-			move (speed);
+		if (Input.GetMouseButton (0)) {
+			Vector2 position = Input.mousePosition;
+			isMoving = true;
+			isMoveRight = (position.x > Screen.width / 2);
+			Debug.Log ("x:" + position.x + " screen.width:" + Screen.width);
+		} else {
+			isMoving = false;
 		}
 
-		if (Input.touchCount > 0 && Input.GetTouch(0).position.x > Screen.width / 2) {
-			move(speed);
+		if (isMoving) {
+			if (isMoveRight) {
+				move (speed);
+			} else {
+				move (-speed);
+			}
 		} else {
-			move(-speed);
+			move (0);
 		}
 	}
 
