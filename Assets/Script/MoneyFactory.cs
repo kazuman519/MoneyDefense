@@ -4,6 +4,7 @@ using System.Collections;
 public class MoneyFactory : MonoBehaviour {
 	public string prefabName = "Prefabs/MoneyObject";
 	public float generateTime = 2.0f;
+	public float positionOffset = 10;
 	private float previousGeneratedTime;
 
 	// Use this for initialization
@@ -16,6 +17,7 @@ public class MoneyFactory : MonoBehaviour {
 		if (shouldCreateNextEnemy()) {
 			Vector2 position = this.transform.position;
 			Object prefab = Resources.Load (prefabName);
+			position.x = position.x + positionOffset;
 			Instantiate (prefab, position, Quaternion.identity);
 		}
 	}
