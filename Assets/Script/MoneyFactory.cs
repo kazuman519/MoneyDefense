@@ -30,4 +30,21 @@ public class MoneyFactory : MonoBehaviour {
 		}
 		return false;
 	}
+
+	// ------------------------------------------------
+	// on clicked methods
+	// ------------------------------------------------
+
+	public void onMoney1kButtonClicked(){
+ 		Debug.Log ("on money1kbutton clicked");
+		shouldCreateNextEnemy ();
+	}
+
+	public void onMoney5kButtonClicked(){
+		Debug.Log ("on money5kbutton clicked");
+	}
+
+	public void onMoney10kButtonClicked(){
+		Debug.Log ("on money10kbutton clicked");
+	}
 }

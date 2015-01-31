@@ -14,11 +14,11 @@ public class OyagiController: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		/*
 		if (Input.GetMouseButton (0)) {
 			Vector2 position = Input.mousePosition;
 			isMoving = true;
 			isMoveRight = (position.x > Screen.width / 2);
-			Debug.Log ("x:" + position.x + " screen.width:" + Screen.width);
 		} else {
 			isMoving = false;
 		}
@@ -32,6 +32,7 @@ public class OyagiController: MonoBehaviour {
 		} else {
 			move (0);
 		}
+		*/
 	}
 
 	void move(float speed) {
