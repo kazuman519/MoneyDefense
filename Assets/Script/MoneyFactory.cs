@@ -15,7 +15,7 @@ public class MoneyFactory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (shouldCreateNextEnemy()) {
+		if (shouldCreateNextObject()) {
 			Vector2 position = this.transform.position;
 			Object prefab = Resources.Load (prefabName);
 			position.x = position.x + positionOffset;
@@ -24,7 +24,7 @@ public class MoneyFactory : MonoBehaviour {
 		}
 	}
 
-	bool shouldCreateNextEnemy () {
+	bool shouldCreateNextObject () {
 		float time = Time.realtimeSinceStartup;
 		if (time > previousGeneratedTime + generateTime) {
 			previousGeneratedTime = time;
