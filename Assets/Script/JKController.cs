@@ -10,6 +10,7 @@ public class JKController: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.gameObject.rigidbody2D.velocity = new Vector2(-speed, 0);
+		Vector2 velocity = this.gameObject.rigidbody2D.velocity;
+		this.gameObject.rigidbody2D.velocity = new Vector2(-speed, velocity.y);
 	}
 }
