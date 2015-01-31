@@ -15,13 +15,6 @@ public class MoneyFactory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (shouldCreateNextObject()) {
-			Vector2 position = this.transform.position;
-			Object prefab = Resources.Load (prefabName);
-			position.x = position.x + positionOffset;
-			Object instance = Instantiate (prefab, position, Quaternion.identity);
-			Object.Destroy(instance, destroyTime);
-		}
 	}
 
 	bool shouldCreateNextObject () {
@@ -33,13 +26,21 @@ public class MoneyFactory : MonoBehaviour {
 		return false;
 	}
 
+	void createMoney1kObject() {
+		Vector2 position = this.transform.position;
+		Object prefab = Resources.Load (prefabName);
+		position.x = position.x + positionOffset;
+		Object instance = Instantiate (prefab, position, Quaternion.identity);
+		Object.Destroy(instance, destroyTime);
+	}
+
 	// ------------------------------------------------
 	// on clicked methods
 	// ------------------------------------------------
 
 	public void onMoney1kButtonClicked(){
  		Debug.Log ("on money1kbutton clicked");
-		shouldCreateNextEnemy ();
+		createMoney1kObject ();
 	}
 
 	public void onMoney5kButtonClicked(){
