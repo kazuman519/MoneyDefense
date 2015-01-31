@@ -5,6 +5,7 @@ public class MoneyFactory : MonoBehaviour {
 	public string prefabName = "Prefabs/Money1kObject";
 	public float generateTime = 2.0f;
 	public float positionOffset = 1;
+	public float destroyTime = 1.0f;
 	private float previousGeneratedTime;
 
 	// Use this for initialization
@@ -18,7 +19,8 @@ public class MoneyFactory : MonoBehaviour {
 			Vector2 position = this.transform.position;
 			Object prefab = Resources.Load (prefabName);
 			position.x = position.x + positionOffset;
-			Instantiate (prefab, position, Quaternion.identity);
+			Object instance = Instantiate (prefab, position, Quaternion.identity);
+			Object.Destroy(instance, destroyTime);
 		}
 	}
 
