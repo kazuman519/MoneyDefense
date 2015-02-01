@@ -4,7 +4,8 @@ using System.Collections;
 public class JKController: MonoBehaviour {
 	public float defaultSpeed = 1;
 	public string tagDisappear = "Money10k";
-	public string[] tagsWait = {"Money1k", "Money5k"};
+	public string tagWait = "Money1k";
+	public string tagWaitStrong = "Money5k";
 	private float speed;
 	private float stopWaitTime = 10f;
 	private float previousStopTime;
@@ -34,8 +35,10 @@ public class JKController: MonoBehaviour {
 	void OnCollisionEnter2D (Collision2D c) {
 		if (c.gameObject.tag == tagDisappear) {
 			isRequestLeave = true;
-		} else if (isTagWait(c.gameObject.tag)) {
-			RequestStop(5.0f);
+		} else if (c.gameObject.tag == tagWaitStrong) {
+			RequestStop(0.5f);
+		} else if (c.gameObject.tag == tagWait) {
+			RequestStop(2.0f);
 			Object.Destroy(c.gameObject);
 		}
 	}
@@ -50,7 +53,7 @@ public class JKController: MonoBehaviour {
 				walletController.cash = 0;
 				speed = defaultSpeed;
 			} else if (walletController.cash == 0){ 
-				speed = defaultSpeed * 2;
+				speed = defaultSpeed * 3;
 			} else {
 				// TODO: play steal sound
 			}
@@ -59,17 +62,9 @@ public class JKController: MonoBehaviour {
 		}
 	}
 
-	bool isTagWait(string tag) {
-		foreach (string canonicalTag in tagsWait) {
-			if (tag == canonicalTag) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 	void RequestStop(float waitTime) {
 		stopWaitTime = waitTime;
+		previousStopTime = Time.realtimeSinceStartup;
 		isRequestStop = true;
 	}
 
@@ -83,7 +78,6 @@ public class JKController: MonoBehaviour {
 		if (time < previousStopTime + stopWaitTime ) {
 			return true;
 		}
-		previousStopTime = time;
 		isRequestStop = false;
 
 		return false;
