@@ -3,6 +3,7 @@ using System.Collections;
 
 public class OyagiController: MonoBehaviour {
 	public float speed = 1;
+	public float controllerAreaBottomOffset = 60;
 	private bool isMoving;
 	private bool isMoveRight;
 
@@ -14,14 +15,21 @@ public class OyagiController: MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		// handle mouse event.
 		if (Input.GetMouseButton (0)) {
 			Vector2 position = Input.mousePosition;
-			isMoving = true;
-			isMoveRight = (position.x > Screen.width / 2);
+
+			if (position.y > controllerAreaBottomOffset) {
+				isMoving = true;
+				isMoveRight = (position.x > Screen.width / 2);
+			} else {
+				isMoving = false;
+			}
 		} else {
 			isMoving = false;
 		}
 
+		// change moving state.
 		if (isMoving) {
 			if (isMoveRight) {
 				move (speed);
