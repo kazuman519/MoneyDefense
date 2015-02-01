@@ -27,8 +27,11 @@ public class JKController: MonoBehaviour {
 	void OnCollisionEnter2D (Collision2D c) {
 		if (c.gameObject.tag == tagDisappear) {
 			Object.Destroy (this.gameObject);
+			Object.Destroy(c.gameObject);
 		} else if (isTagWait(c.gameObject.tag)) {
+			Debug.Log("isWait");
 			RequestStop(10.0f);
+			Object.Destroy(c.gameObject);
 		}
 	}
 
@@ -47,13 +50,17 @@ public class JKController: MonoBehaviour {
 	}
 
 	bool ShouldStop() {
+		if (!isRequestStop) {
+			return false;
+		}
+
 		float time = Time.realtimeSinceStartup;
 
-		if (time >= previousStopTime + stopWaitTime ) {
-			previousStopTime = time;
-			isRequestStop = false;
+		if (time < previousStopTime + stopWaitTime ) {
 			return true;
 		}
+		previousStopTime = time;
+		isRequestStop = false;
 
 		return false;
 	}
