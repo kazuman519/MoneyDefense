@@ -26,4 +26,8 @@ public class ResultLayerController : MonoBehaviour {
 	public void HideResultLayer() {
 		this.gameObject.SetActive(false);
 	}
+
+	public void OnResultButtonClicked() {
+		Application.LoadLevel ("MainScene");
+	}
 }
