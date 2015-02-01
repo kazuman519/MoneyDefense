@@ -14,7 +14,7 @@ public class GameTimerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GetRestTime(GetRestTime());
+		UpdateText (GetRestTime());
 	}
 
 	public float GetRestTime() {
