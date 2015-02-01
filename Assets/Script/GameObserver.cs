@@ -39,6 +39,6 @@ public class GameObserver : MonoBehaviour {
 	void FinishGame() {
 		float resultCash = walletController.cash + atmController.cash;
 		Debug.Log ("chash " + resultCash + " " + startCash);
-		resultLayerController.ShowResultLayer(resultCash, startCash);
+		resultLayerController.ShowResultLayer(resultCash, startCash); 
 	}
 }
