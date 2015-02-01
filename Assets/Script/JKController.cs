@@ -11,6 +11,11 @@ public class JKController: MonoBehaviour {
 	public AudioClip atackStealAudioClip2;
 	public AudioClip atackCashZeroAudioClip;
 
+	public AudioClip getMoney1kAudioClip;
+	public AudioClip getMoney5kAudioClip;
+	public AudioClip getMoney10kAudioClip1;
+	public AudioClip getMoney10kAudioClip2;
+
 	private float speed;
 	private float stopWaitTime = 10f;
 	private float previousStopTime;
@@ -40,11 +45,14 @@ public class JKController: MonoBehaviour {
 	void OnCollisionEnter2D (Collision2D c) {
 		if (c.gameObject.tag == tagDisappear) {
 			isRequestLeave = true;
+			PlayAudioClip (GetGetMoney10kAudioClipByRandom());
 		} else if (c.gameObject.tag == tagWaitStrong) {
 			RequestStop(0.5f);
+			PlayAudioClip (getMoney5kAudioClip);
 		} else if (c.gameObject.tag == tagWait) {
 			RequestStop(2.0f);
 			Object.Destroy(c.gameObject);
+			PlayAudioClip (getMoney1kAudioClip);
 		} else if (c.gameObject.tag == "PullDeposit") {
 
 			// Audio play check
@@ -132,6 +140,16 @@ public class JKController: MonoBehaviour {
 			return atackStealAudioClip1;
 		} else {
 			return atackStealAudioClip2;
+		}
+	}
+
+	AudioClip GetGetMoney10kAudioClipByRandom() {
+		int randomNum = (int)(Random.value * 2);
+		
+		if(randomNum == 0){
+			return getMoney10kAudioClip1;
+		} else {
+			return getMoney10kAudioClip2;
 		}
 	}
 }
