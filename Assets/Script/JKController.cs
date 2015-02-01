@@ -23,11 +23,11 @@ public class JKController: MonoBehaviour {
 			Run ();
 		}
 	}
-	
-	void OnTriggerEnter2D (Collider2D c) {
-		if (c.tag == tagDisappear) {
+
+	void OnCollisionEnter2D (Collision2D c) {
+		if (c.gameObject.tag == tagDisappear) {
 			Object.Destroy (this.gameObject);
-		} else if (isTagWait(c.tag)) {
+		} else if (isTagWait(c.gameObject.tag)) {
 			RequestStop(10.0f);
 		}
 	}
