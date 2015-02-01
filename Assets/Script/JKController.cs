@@ -6,6 +6,11 @@ public class JKController: MonoBehaviour {
 	public string tagDisappear = "Money10k";
 	public string tagWait = "Money1k";
 	public string tagWaitStrong = "Money5k";
+
+	public AudioClip atackStealAudioClip1;
+	public AudioClip atackStealAudioClip2;
+	public AudioClip atackCashZeroAudioClip;
+
 	private float speed;
 	private float stopWaitTime = 10f;
 	private float previousStopTime;
@@ -40,6 +45,21 @@ public class JKController: MonoBehaviour {
 		} else if (c.gameObject.tag == tagWait) {
 			RequestStop(2.0f);
 			Object.Destroy(c.gameObject);
+		} else if (c.gameObject.tag == "PullDeposit") {
+
+			// Audio play check
+
+			WalletController walletController = c.gameObject.GetComponent<WalletController>();
+			
+			if (walletController.cash > 0) {
+				PlayAudioClip(GetAtackStealAudioClipByRandom());
+			} else if (walletController.cash == 0){ 
+				PlayAudioClip(atackCashZeroAudioClip);
+			} else {
+				// TODO: play steal sound
+			}
+		} else {
+			
 		}
 	}
 
@@ -51,7 +71,6 @@ public class JKController: MonoBehaviour {
 			if (walletController.cash > 0) {
 				isRequestLeave = true;
 				walletController.cash = 0;
-				speed = defaultSpeed;
 			} else if (walletController.cash == 0){ 
 				speed = defaultSpeed * 3;
 			} else {
@@ -96,5 +115,23 @@ public class JKController: MonoBehaviour {
 	void Leave() {
 		Vector2 velocity = this.gameObject.rigidbody2D.velocity;
 		this.gameObject.rigidbody2D.velocity = new Vector2(speed, velocity.y);
+	}
+
+
+	// Audio
+
+	void PlayAudioClip(AudioClip clip) {  
+		audio.clip = clip;
+		audio.Play ();
+	}
+
+	AudioClip GetAtackStealAudioClipByRandom() {
+		int randomNum = (int)(Random.value * 2);
+
+		if(randomNum == 0){
+			return atackStealAudioClip1;
+		} else {
+			return atackStealAudioClip2;
+		}
 	}
 }
