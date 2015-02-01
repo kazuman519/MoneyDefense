@@ -18,7 +18,7 @@ public class JKController: MonoBehaviour {
 		isRequestLeave = false;
 		previousStopTime = Time.realtimeSinceStartup;
 
-		speed = defaultSpeed;
+		speed = defaultSpeed + Random.value;
 	}
 	
 	// Update is called once per frame
