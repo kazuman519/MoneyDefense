@@ -30,16 +30,16 @@ public class ResultLayerController : MonoBehaviour {
 	AudioClip SelectAudioClip(float resultCash, float startCash) {
 		float percentage = resultCash / startCash * 100f; 
 
-		if (percentage >= 100.0f) {
+		if (percentage >= 80.0f) {
 			return audioClipResultPerfect;
-		} else if (percentage >= 70.0f) {
+		} else if (percentage >= 60.0f) {
 			return audioClipResultGreat;
 		} else if (percentage >= 40.0f) {
 			return audioClipResultGood;
-		} else if (percentage <= 0.0f) {
-			return audioClipResultFail;
-		} else {
+		} else if (percentage >= 20.0f) {
 			return audioClipResultOK;
+		} else {
+			return audioClipResultFail;
 		}
 	}
 
