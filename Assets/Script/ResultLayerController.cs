@@ -10,6 +10,8 @@ public class ResultLayerController : MonoBehaviour {
 	public AudioClip audioClipResultGreat;
 	public AudioClip audioClipResultPerfect;
 
+	public AudioClip audioClipGameReplay;
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -54,6 +56,7 @@ public class ResultLayerController : MonoBehaviour {
 	}
 
 	public void OnResultButtonClicked() {
+		PlayAudioClip (audioClipGameReplay);
 		Application.LoadLevel ("MainScene");
 	}
 }

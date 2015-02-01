@@ -5,8 +5,12 @@ public class JKFactory : MonoBehaviour {
 	public Object jk1Prefab;
 	public Object jk2Prefab;
 	public Object jk3Prefab;
+
+	public AudioClip spawnJkAudioClip;
+
 	public float generateTime = 3.0f;
 	private float previousGeneratedTime;
+	
 
 	// Use this for initialization
 	void Start () {
@@ -46,5 +50,14 @@ public class JKFactory : MonoBehaviour {
 		}
 
 		Instantiate (spawnJkPrefab, position, Quaternion.identity);
+		PlayAudioClip (spawnJkAudioClip);
+	}
+
+
+	// Audio
+	
+	void PlayAudioClip(AudioClip clip) {  
+		audio.clip = clip;
+		audio.Play ();
 	}
 }
