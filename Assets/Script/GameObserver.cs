@@ -7,22 +7,24 @@ public class GameObserver : MonoBehaviour {
 	public GameObject timerObject;
 	public GameObject resultLayerObject;
 
-	private WalletController walletcontroller;
+	private WalletController walletController;
 	private ATMController atmController;
 	private GameTimerController timerController;
 	private ResultLayerController resultLayerController;
+	private float startCash = 0.0;
 
 	// Use this for initialization
 	void Start () {
-		walletcontroller = oyagiObject.GetComponent<WalletController>();
+		walletController = oyagiObject.GetComponent<WalletController>();
 		atmController = atmObject.GetComponent<ATMController>();
 		timerController = timerObject.GetComponent<GameTimerController>();
 		resultLayerController = resultLayerObject.GetComponent<ResultLayerController>();
+		startCash = atmController.cash;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (walletcontroller.cash + atmController.cash  <= 0f) {
+		if (walletController.cash + atmController.cash  <= 0f) {
 			FinishGame ();
 		} else if (timerController.GetRestTime() <= 0f) {
 			FinishGame ();
@@ -30,6 +32,7 @@ public class GameObserver : MonoBehaviour {
 	}
 
 	void FinishGame() {
-		resultLayerController.ShowResultLayer(walletcontroller.cash + atmController.cash);
+		float resultCash = walletController.cash + atmController.cash;
+		resultLayerController.ShowResultLayer(resultCash, startCash);
 	}
 }
