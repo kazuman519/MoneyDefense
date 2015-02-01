@@ -37,7 +37,6 @@ public class MoneyFactory : MonoBehaviour {
 	public void onMoney5kButtonClicked(){
 		Debug.Log ("on money5kbutton clicked");
 		createMoneyObject (prefabMoney5kObjectName);
-
 	}
 
 	public void onMoney10kButtonClicked(){
