@@ -18,4 +18,13 @@ public class WalletController : MonoBehaviour {
 	void UpdateText() {
 		text.text = cash.ToString();
 	}
+
+	public bool PullCash(float amount) {
+		if (amount <= cash) {
+			cash = cash - amount;
+			return true;
+		}
+
+		return false;
+	}
 }
