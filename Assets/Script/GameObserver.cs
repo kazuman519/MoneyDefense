@@ -11,7 +11,8 @@ public class GameObserver : MonoBehaviour {
 	private ATMController atmController;
 	private GameTimerController timerController;
 	private ResultLayerController resultLayerController;
-	private float startCash = 0.0;
+	private float startCash = 0.0f; 
+	private bool isFinished = false;
 
 	// Use this for initialization
 	void Start () {
@@ -24,15 +25,20 @@ public class GameObserver : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (walletController.cash + atmController.cash  <= 0f) {
-			FinishGame ();
-		} else if (timerController.GetRestTime() <= 0f) {
-			FinishGame ();
+		if (!isFinished) {
+			if (walletController.cash + atmController.cash  <= 0f) {
+				isFinished = true;
+				FinishGame ();
+			} else if (timerController.GetRestTime() <= 0f) {
+				isFinished = true;
+				FinishGame ();
+			}
 		}
 	}
 
 	void FinishGame() {
 		float resultCash = walletController.cash + atmController.cash;
+		Debug.Log ("chash " + resultCash + " " + startCash);
 		resultLayerController.ShowResultLayer(resultCash, startCash);
 	}
 }

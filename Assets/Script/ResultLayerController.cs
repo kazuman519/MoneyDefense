@@ -12,8 +12,6 @@ public class ResultLayerController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		SetText (0);
-
 	}
 	
 	// Update is called once per frame
@@ -24,18 +22,19 @@ public class ResultLayerController : MonoBehaviour {
 		resultCashText.text = resultCash.ToString();
 	}
 
-	void PlayAudioClip(AudioClip clip) {
+	void PlayAudioClip(AudioClip clip) {  
 		audio.clip = clip;
 		audio.Play ();
 	}
 
 	AudioClip SelectAudioClip(float resultCash, float startCash) {
-		float percentage = resultCash / startCash;
+		float percentage = resultCash / startCash * 100f; 
+
 		if (percentage >= 100.0f) {
 			return audioClipResultPerfect;
-		} else if (percentage >= 90.0f) {
+		} else if (percentage >= 70.0f) {
 			return audioClipResultGreat;
-		} else if (percentage >= 80.0f) {
+		} else if (percentage >= 40.0f) {
 			return audioClipResultGood;
 		} else if (percentage <= 0.0f) {
 			return audioClipResultFail;
