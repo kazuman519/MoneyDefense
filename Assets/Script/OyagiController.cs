@@ -4,6 +4,11 @@ using System.Collections;
 public class OyagiController: MonoBehaviour {
 	public float speed = 1;
 	public float controllerAreaBottomOffset = 60;
+
+	public AudioClip shoutWithPullMoney1kAudioClip;
+	public AudioClip shoutWithPullMoney5kAudioClip;
+	public AudioClip shoutWithPullMoney10kAudioClip;
+
 	private bool isMoving;
 	private bool isMoveRight;
 
@@ -43,5 +48,34 @@ public class OyagiController: MonoBehaviour {
 
 	void move(float speed) {
 		this.gameObject.rigidbody2D.velocity = new Vector3(speed, 0);
+	}
+
+
+	// ------------------------------------------------
+	// audio methods
+	// ------------------------------------------------
+
+	 private void PlayAuidoClip(AudioClip audioClip) {
+		audio.clip = audioClip;
+		audio.Play ();
+	}
+
+	// ------------------------------------------------
+	// on clicked methods
+	// ------------------------------------------------
+	
+	public void onMoney1kButtonClicked(){
+		Debug.Log ("on money1kbutton clicked");
+		PlayAuidoClip (shoutWithPullMoney1kAudioClip);
+	}
+	
+	public void onMoney5kButtonClicked(){
+		Debug.Log ("on money5kbutton clicked");
+		PlayAuidoClip (shoutWithPullMoney5kAudioClip);
+	}
+	
+	public void onMoney10kButtonClicked(){
+		Debug.Log ("on money10kbutton clicked");
+		PlayAuidoClip (shoutWithPullMoney10kAudioClip);
 	}
 }

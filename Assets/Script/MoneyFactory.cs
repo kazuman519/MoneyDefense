@@ -41,22 +41,23 @@ public class MoneyFactory : MonoBehaviour {
 		}
 	}
 
+	public void ShootMoney(Object moneyPrefab, float requestPrice) {
+
+	}
+
 	// ------------------------------------------------
 	// on clicked methods
 	// ------------------------------------------------
 
 	public void onMoney1kButtonClicked(){
- 		Debug.Log ("on money1kbutton clicked");
 		putMoney (money1kObject, prefabMoney1kObjectPrice);
 	}
 
 	public void onMoney5kButtonClicked(){
-		Debug.Log ("on money5kbutton clicked");
 		putMoney (money5kObject, prefabMoney5kObjectPrice);
 	}
 
 	public void onMoney10kButtonClicked(){
-		Debug.Log ("on money10kbutton clicked");
 		putMoney (money10kObject, prefabMoney10kObjectPrice);
 	}
 }
