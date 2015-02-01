@@ -12,10 +12,10 @@ public class WalletController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		UpdateText ();
 	}
 
 	void UpdateText() {
-		text.text = string.Format("%f", cash);
+		text.text = cash.ToString();
 	}
 }

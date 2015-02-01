@@ -14,18 +14,19 @@ public class ATMController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		UpdateText ();
 	}
 
-	void OnTriggerEnter2D (Collider2D c) {
+	void OnTriggerEnter2D (Collider2D c) { 
 		if (c.tag == tagPullDeposit) {
+			Debug.Log ("hoge" + c.tag);
 			WalletController wallet = c.GetComponent<WalletController>();
 			PullDeposit (wallet);
 		}
 	}
 
 	void UpdateText () {
-		text.text = string.Format("%f", cash);
+		text.text = cash.ToString();
 	}
 
 	bool PullDeposit(WalletController wallet) {
