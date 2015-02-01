@@ -19,7 +19,6 @@ public class ATMController : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D c) { 
 		if (c.tag == tagPullDeposit) { 
-			Debug.Log ("hoge" + c.tag);
 			WalletController wallet = c.GetComponent<WalletController>();
 			PullDeposit (wallet);
 		}

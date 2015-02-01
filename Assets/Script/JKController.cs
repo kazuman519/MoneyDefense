@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class JKController: MonoBehaviour {
-	public float speed = 1;
+	public float defaultSpeed = 1;
 	public string tagDisappear = "Money10k";
 	public string[] tagsWait = {"Money1k", "Money5k"};
+	private float speed;
 	private float stopWaitTime = 10f;
 	private float previousStopTime;
 	private bool isRequestStop;
@@ -15,6 +16,8 @@ public class JKController: MonoBehaviour {
 		isRequestStop = false;
 		isRequestLeave = false;
 		previousStopTime = Time.realtimeSinceStartup;
+
+		speed = defaultSpeed;
 	}
 	
 	// Update is called once per frame
@@ -31,19 +34,26 @@ public class JKController: MonoBehaviour {
 	void OnCollisionEnter2D (Collision2D c) {
 		if (c.gameObject.tag == tagDisappear) {
 			isRequestLeave = true;
-			Object.Destroy(c.gameObject);
 		} else if (isTagWait(c.gameObject.tag)) {
-			RequestStop(10.0f);
+			RequestStop(5.0f);
 			Object.Destroy(c.gameObject);
-		} else if (c.gameObject.tag == "PullDeposit") {
-			WalletController walletController = c.gameObject.GetComponent<WalletController>();
+		}
+	}
 
+	void OnCollisionStay2D (Collision2D c) {
+		if (c.gameObject.tag == "PullDeposit") {
+			speed = defaultSpeed * 2;
+			
+			WalletController walletController = c.gameObject.GetComponent<WalletController>();
+			
 			if (walletController.cash > 0) {
 				isRequestLeave = true;
 				walletController.cash = 0;
 			} else {
 				// TODO: play steal sound
 			}
+		} else {
+   
 		}
 	}
 
