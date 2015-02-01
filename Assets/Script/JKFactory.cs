@@ -2,7 +2,9 @@
 using System.Collections;
 
 public class JKFactory : MonoBehaviour {
-	public string prefabName = "Prefabs/JKObject";
+	public Object jk1Prefab;
+	public Object jk2Prefab;
+	public Object jk3Prefab;
 	public float generateTime = 3.0f;
 	private float previousGeneratedTime;
 
@@ -14,12 +16,7 @@ public class JKFactory : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (shouldCreateNextEnemy()) {
-			Vector2 position = this.transform.position;
-
-			// プレハブを取得
-			Object prefab = Resources.Load (prefabName);
-			// プレハブからインスタンスを生成
-			Instantiate (prefab, position, Quaternion.identity);
+			spawnJkByRandom();
 		}
 	}
 
@@ -30,5 +27,24 @@ public class JKFactory : MonoBehaviour {
 			return true;
 		}
 		return false;
+	}
+
+	private void spawnJkByRandom(){
+		int randomNum = (int)(Random.value * 3.0f);
+		Vector2 position = this.transform.position;
+
+		Object spawnJkPrefab;
+
+		if (randomNum == 0) {
+			spawnJkPrefab = jk1Prefab;
+		} else if (randomNum == 1) {
+			spawnJkPrefab = jk2Prefab;
+		} else if (randomNum == 2) {
+			spawnJkPrefab = jk3Prefab;
+		} else {
+			spawnJkPrefab = jk1Prefab;
+		}
+
+		Instantiate (spawnJkPrefab, position, Quaternion.identity);
 	}
 }
