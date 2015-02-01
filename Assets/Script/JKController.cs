@@ -42,13 +42,15 @@ public class JKController: MonoBehaviour {
 
 	void OnCollisionStay2D (Collision2D c) {
 		if (c.gameObject.tag == "PullDeposit") {
-			speed = defaultSpeed * 2;
 			
 			WalletController walletController = c.gameObject.GetComponent<WalletController>();
 			
 			if (walletController.cash > 0) {
 				isRequestLeave = true;
 				walletController.cash = 0;
+				speed = defaultSpeed;
+			} else if (walletController.cash == 0){ 
+				speed = defaultSpeed * 2;
 			} else {
 				// TODO: play steal sound
 			}
