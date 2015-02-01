@@ -5,6 +5,9 @@ public class MoneyFactory : MonoBehaviour {
 	public string prefabMoney1kObjectName = "Prefabs/Money1kObject";
 	public string prefabMoney5kObjectName = "Prefabs/Money5kObject";
 	public string prefabMoney10kObjectName = "Prefabs/Money10kObject";
+	private float prefabMoney1kObjectPrice = 1000.0f;
+	private float prefabMoney5kObjectPrice = 5000.0f;
+	private float prefabMoney10kObjectPrice = 10000.0f;
 
 	public float positionOffset = 1;
 	private float previousGeneratedTime;
@@ -25,22 +28,36 @@ public class MoneyFactory : MonoBehaviour {
 		Object instance = Instantiate (prefab, position, Quaternion.identity);
 	}
 
+
+	public void putMoney(string prefabName, float requestPrice) {
+		WalletController wallet = this.gameObject.GetComponent<WalletController>();
+		float price = .0f;
+
+		if (wallet.PullCash(requestPrice)) {
+			price = prefabMoney1kObjectPrice;
+		}
+
+		if (price > .0f) {
+			createMoneyObject(prefabName);
+		}
+	}
+
 	// ------------------------------------------------
 	// on clicked methods
 	// ------------------------------------------------
 
 	public void onMoney1kButtonClicked(){
  		Debug.Log ("on money1kbutton clicked");
-		createMoneyObject (prefabMoney1kObjectName);
+		putMoney (prefabMoney1kObjectName, prefabMoney1kObjectPrice);
 	}
 
 	public void onMoney5kButtonClicked(){
 		Debug.Log ("on money5kbutton clicked");
-		createMoneyObject (prefabMoney5kObjectName);
+		putMoney (prefabMoney5kObjectName, prefabMoney5kObjectPrice);
 	}
 
 	public void onMoney10kButtonClicked(){
 		Debug.Log ("on money10kbutton clicked");
-		createMoneyObject (prefabMoney10kObjectName);
+		putMoney (prefabMoney10kObjectName, prefabMoney10kObjectPrice);
 	}
 }
