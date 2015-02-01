@@ -18,7 +18,7 @@ public class ATMController : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D c) { 
-		if (c.tag == tagPullDeposit) {
+		if (c.tag == tagPullDeposit) { 
 			Debug.Log ("hoge" + c.tag);
 			WalletController wallet = c.GetComponent<WalletController>();
 			PullDeposit (wallet);
@@ -31,6 +31,7 @@ public class ATMController : MonoBehaviour {
 
 	bool PullDeposit(WalletController wallet) {
 		if (depositPullPrice <= cash) {
+			audio.Play();
 			wallet.cash = wallet.cash + depositPullPrice;
 			cash = cash - depositPullPrice;
 			return true;
