@@ -8,12 +8,16 @@ public class JKFactory : MonoBehaviour {
 
 	public AudioClip spawnJkAudioClip;
 
-	public float generateTime = 3.0f;
+	public float generateMinTime = 1.0f;
+	public float generateMaxTime = 3.0f;
+
+	private float generateTime = 1.0f;
 	private float previousGeneratedTime;
 	
 
 	// Use this for initialization
 	void Start () {
+		generateTime = getRandomGenerateTime (generateMinTime, generateMaxTime);
 		previousGeneratedTime = Time.realtimeSinceStartup;
 	}
 	
@@ -27,6 +31,7 @@ public class JKFactory : MonoBehaviour {
 	bool shouldCreateNextEnemy () {
 		float time = Time.realtimeSinceStartup;
 		if (time > previousGeneratedTime + generateTime) {
+			generateTime = getRandomGenerateTime (generateMinTime, generateMaxTime);
 			previousGeneratedTime = time;
 			return true;
 		}
@@ -53,6 +58,11 @@ public class JKFactory : MonoBehaviour {
 		PlayAudioClip (spawnJkAudioClip);
 	}
 
+	// Utill
+
+	float getRandomGenerateTime(float min, float max) {
+		return Random.Range (min, max);
+	}
 
 	// Audio
 	
